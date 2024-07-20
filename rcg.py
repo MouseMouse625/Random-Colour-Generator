@@ -26,28 +26,31 @@ if data["welcomeMessageBool"] == False:
     py.mixer.music.load("Message.wav")
     py.mixer.music.set_volume(0.4)
     py.mixer.music.play()
-    ms.showinfo("Welcome" , "This is a short programming project, that in short is a random colour generator. It can see if you've ever generated that exact colour before, and can tell you the colour value.")
+    ms.showinfo("Welcome" , "This is a short programming project, that in short is a random colour generator. It can also tell you the colour value.")
     py.mixer.music.load("Message.wav")
     py.mixer.music.set_volume(0.4)
     py.mixer.music.play()
     ms.showinfo("Tutorial" , "You can press Space to change the colour, and Shift to see the colour value.")
 while programRunning:
     mouseX , mouseY = py.mouse.get_pos()
-    data["colourValue"] = "RGB: " + str(data["rc"]) + "\n" + "Hexadecimal: " + rgb2hex(data["rc"][0] , data["rc"][1] , data["rc"][2])
     for event in py.event.get():
         if event.type == py.QUIT:
             programRunning = False
         if event.type == py.KEYDOWN:
             if event.key == py.K_SPACE:
+                data["colourValue"] = "RGB: " + str(data["rc"]) + "\n" + "Hexadecimal: " + rgb2hex(data["rc"][0] , data["rc"][1] , data["rc"][2])
                 py.mixer.music.load("NewRc.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
                 newRc()
-            if event.key == py.K_LSHIFT or py.K_RSHIFT:
+            if event.key == py.K_LSHIFT or event.key == py.K_RSHIFT:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
                 ms.showinfo("Colour Value" , data["colourValue"])
+            if event.key == py.K_LALT or event.key == py.K_RALT:
+                data["rc"] = (255 - (data["rc"][0]) , 255 - (data["rc"][1]) , 255 - (data["rc"][2]))
+                data["colourValue"] = "RGB: " + str(data["rc"]) + "\n" + "Hexadecimal: " + rgb2hex(data["rc"][0] , data["rc"][1] , data["rc"][2])
     screen.fill(data["rc"])
     py.display.flip()
 py.quit()
