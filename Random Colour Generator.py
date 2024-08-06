@@ -13,7 +13,7 @@ py.display.set_caption("Random Colour Generator")
 data = {"rc" : (rd.randint(0 , 255) , rd.randint(0 , 255) , rd.randint(0 , 255)) , "welcomeMessageBool" : False}
 data["colourValue"] = "RGB: " + str(data["rc"]) + "\n" + "Hexadecimal: " + rgb2hex(data["rc"][0] , data["rc"][1] , data["rc"][2])
 try:
-    with open("data.txt") as rcgData:
+    with open("Data.txt") as rcgData:
         data = json.load(rcgData)
 except:
     pass
@@ -54,5 +54,5 @@ while programRunning:
     screen.fill(data["rc"])
     py.display.flip()
 py.quit()
-with open("data.txt" , "w") as rcgData:
+with open("Data.txt" , "w") as rcgData:
     json.dump(data , rcgData)
