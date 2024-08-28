@@ -8,12 +8,12 @@ py.mixer.init()
 screenWidth = 500
 screenHeight = 500
 screen = py.display.set_mode((500 , 500))
-py.display.set_icon(py.image.load("Icon.png"))
+py.display.set_icon(py.image.load("Window Icon.png"))
 py.display.set_caption("Random Colour Generator")
 data = {"rc" : (rd.randint(0 , 255) , rd.randint(0 , 255) , rd.randint(0 , 255)) , "welcomeMessageBool" : False}
 data["colourValue"] = "RGB: " + str(data["rc"]) + "\n" + "Hexadecimal: " + rgb2hex(data["rc"][0] , data["rc"][1] , data["rc"][2])
 try:
-    with open("Data.txt") as rcgData:
+    with open("data.txt") as rcgData:
         data = json.load(rcgData)
 except:
     pass
@@ -39,7 +39,7 @@ while programRunning:
         if event.type == py.KEYDOWN:
             if event.key == py.K_SPACE:
                 data["colourValue"] = "RGB: " + str(data["rc"]) + "\n" + "Hexadecimal: " + rgb2hex(data["rc"][0] , data["rc"][1] , data["rc"][2])
-                py.mixer.music.load("NewRc.wav")
+                py.mixer.music.load("New Random Colour.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
                 newRc()
@@ -54,5 +54,5 @@ while programRunning:
     screen.fill(data["rc"])
     py.display.flip()
 py.quit()
-with open("Data.txt" , "w") as rcgData:
+with open("data.txt" , "w") as rcgData:
     json.dump(data , rcgData)
